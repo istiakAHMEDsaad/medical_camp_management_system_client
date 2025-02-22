@@ -126,13 +126,10 @@ const Navbar = () => {
               >
                 <div className='py-1 pl-[11px] flex items-center gap-2'>
                   <p className='font-semibold text-base'>Name:</p>
-                  <span>lulu</span>
+                  <span className='text-base italic text-red-600'>lulu</span>
                 </div>
                 <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <a>Logout</a>
+                  <Link to={"/login"} className='text-base'>Login</Link>
                 </li>
               </ul>
             </div>

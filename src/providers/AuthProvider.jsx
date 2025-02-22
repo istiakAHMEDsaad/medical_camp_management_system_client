@@ -18,33 +18,33 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // create user
   const createUser = (email, password) => {
-    setLoading(true)
-    return createUserWithEmailAndPassword(auth, email, password)
-  }
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
   // sign in
   const signIn = (email, password) => {
-    setLoading(true)
-    return signInWithEmailAndPassword(auth, email, password)
-  }
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
   // sign in with google
   const signInWithGoogle = () => {
-    setLoading(true)
-    return signInWithPopup(auth, googleProvider)
-  }
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
 
   // logout
   const logOut = async () => {
-    setLoading(true)
-    return signOut(auth)
-  }
+    setLoading(true);
+    return signOut(auth);
+  };
 
   //reset password
   const handleResetPassword = (email) => {
@@ -56,10 +56,21 @@ const AuthProvider = ({children}) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
-    })
-  }
+    });
+  };
 
-  
+  //unsubscribe
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      console.log('CurrentUser-->', currentUser);
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return()=>{
+      return unsubscribe();
+    }
+    
+  }, []);
 
   const authInfo = {
     user,
@@ -71,13 +82,15 @@ const AuthProvider = ({children}) => {
     signInWithGoogle,
     logOut,
     handleResetPassword,
-    updateUserProfile
-  }
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    updateUserProfile,
+  };
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 AuthProvider.propTypes = {
-    children: PropTypes.object.isRequired
-}
+  children: PropTypes.object.isRequired,
+};
 
 export default AuthProvider;
