@@ -6,7 +6,8 @@ const MainLayouts = () => {
   return (
     <div>
       <Navbar />
-      <div>
+      {/* 72+224 */}
+      <div className='min-h-[calc(100vh-296px)]'>
         <Outlet />
       </div>
       <Footer />
