@@ -20,7 +20,7 @@ const Navbar = () => {
 
       <li>
         <NavLink
-          to='/aa'
+          to='/available-camp'
           className={({ isActive, isPending }) =>
             isActive
               ? 'btn btn-secondary text-white'
@@ -44,7 +44,7 @@ const Navbar = () => {
               : 'btn btn-outline btn-secondary text-black'
           }
         >
-          <span>AJoin US</span>
+          <span>Join US</span>
         </NavLink>
       </li>
     </>

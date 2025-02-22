@@ -13,8 +13,8 @@ const Slide = ({ image, text }) => {
             {text}
           </h1>
           <br />
-          <Link to='/aa' className='btn btn-secondary'>
-            Join Us
+          <Link to='/available-camp' className='btn btn-secondary'>
+            Join Our Camp
           </Link>
         </div>
       </div>
