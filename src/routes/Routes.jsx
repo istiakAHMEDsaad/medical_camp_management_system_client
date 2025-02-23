@@ -7,6 +7,9 @@ import SignIn from '../pages/Authentication/SignIn';
 import SignUp from '../pages/Authentication/SignUp';
 import DashboardLayout from '../layouts/DashboardLayout';
 import PrivateRoutes from './PrivateRoutes';
+import AnalyticsGraph from '../components/Dashboard/Participant/AnalyticsGraph';
+import HistoryPayment from '../components/Dashboard/Participant/HistoryPayment';
+import CampsRegistered from '../components/Dashboard/Participant/CampsRegistered';
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +42,32 @@ export const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoutes>
     ),
+    children: [
+      {
+        path: 'analytics',
+        element: (
+          <PrivateRoutes>
+            <AnalyticsGraph />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: 'payment-history',
+        element: (
+          <PrivateRoutes>
+            <HistoryPayment />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: 'registered-camps',
+        element: (
+          <PrivateRoutes>
+            <CampsRegistered />
+          </PrivateRoutes>
+        ),
+      },
+    ],
   },
 ]);
 
