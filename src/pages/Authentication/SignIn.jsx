@@ -17,14 +17,15 @@ const SignIn = () => {
   } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location?.state || '/';
+  // const from = location?.state || '/';
+  const from = location?.state?.from?.pathname || '/'
   const userMail = useRef();
   if (loading) {
     return <LoadingSpinner />;
   }
-  /* if (user) {
-    return <Navigate to={from} replace={true} />;
-  } */
+  if (user) {
+    return <Navigate to={from} replace={true} />
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,7 +37,7 @@ const SignIn = () => {
       await signIn(email, password);
 
       toast.success('Login Successfully');
-      navigate(from, { replace: true });
+      navigate(from, { replace: true })
     } catch (error) {
       toast.error(error?.message);
     }

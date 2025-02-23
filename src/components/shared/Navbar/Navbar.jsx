@@ -1,6 +1,16 @@
 import { Link, NavLink } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth.js';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  console.log(user);
+
+  const handleLogOut = () => {
+    logOut();
+    toast.success('Logout Successfully');
+  };
+
   const navButton = (
     <>
       <li>
@@ -128,9 +138,27 @@ const Navbar = () => {
                   <p className='font-semibold text-base'>Name:</p>
                   <span className='text-base italic text-red-600'>lulu</span>
                 </div>
-                <li>
-                  <Link to={"/login"} className='text-base'>Login</Link>
-                </li>
+
+                {user?.email ? (
+                  <>
+                    <li>
+                      <Link to={'/dash-board'} className='text-base'>
+                        Dashboard
+                      </Link>
+                    </li>
+                    <li>
+                      <button onClick={handleLogOut} className='text-base'>
+                        Logout
+                      </button>
+                    </li>
+                  </>
+                ) : (
+                  <li>
+                    <Link to={'/login'} className='text-base'>
+                      Login
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
