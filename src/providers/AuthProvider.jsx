@@ -60,23 +60,20 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  //unsubscribe
-  /* useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      console.log('CurrentUser-->', currentUser);
-      setUser(currentUser);
-      setLoading(false);
-    });
-    return()=>{
-      return unsubscribe();
-    }
-    
-  }, []); */
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       console.log('CurrentUser-->', currentUser?.email);
       if (currentUser?.email) {
         setUser(currentUser);
+
+        //save or update user info
+        await axios.post(`${import.meta.env.VITE_API_URL}/users/${currentUser?.email}`,{
+          name: currentUser?.displayName,
+          email: currentUser?.email,
+          image: currentUser?.photoURL,
+          role: 'organizer',
+
+        })
 
         //get jwt token
         await axios.post(

@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: '/dashboard',
+    path: '/dash-board',
     element: (
       <PrivateRoutes>
         <DashboardLayout />
@@ -46,4 +46,10 @@ export const router = createBrowserRouter([
 Anwar Hossain
 anawar_hossain@doodle.com
 Anawar@1234
+*/
+
+/* 
+Ola Bibi
+ola_bibi@doodle.com
+Ola@1234
 */

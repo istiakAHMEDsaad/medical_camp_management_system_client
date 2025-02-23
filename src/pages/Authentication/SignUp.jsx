@@ -4,7 +4,7 @@ import { IoWarning } from 'react-icons/io5';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import { TbFidgetSpinner } from 'react-icons/tb';
-import axios from 'axios';
+import { imageUpload } from '../../api/utils';
 
 const SignUp = () => {
   const { loading, createUser, updateUserProfile, signInWithGoogle } =
@@ -18,8 +18,7 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0];
-    const formData = new FormData();
-    formData.append('image', image);
+
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     if (password.length < 6) {
@@ -34,23 +33,27 @@ const SignUp = () => {
     }
 
     // 1. upload image to imgbb
-    const { data } = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_IMGBB_API_KEY
-      }`,
-      formData
-    );
+    const photoURL = await imageUpload(image);
 
-    const image_url = data?.data?.display_url;
     //data?.data?.display_url
 
     try {
       // 2. register user
       await createUser(email, password);
       // 3. save username & profile pic
-      await updateUserProfile(name, image_url);
+      await updateUserProfile(name, photoURL);
       navigate('/login');
       toast.success('Account Create Successfully');
+    } catch (error) {
+      toast.error(error?.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithGoogle();
+      toast.success('Login Successfully');
+      navigate('/');
     } catch (error) {
       toast.error(error?.message);
     }
@@ -156,7 +159,10 @@ const SignUp = () => {
             </p>
             <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
           </div>
-          <div className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+          <div
+            onClick={handleGoogleLogin}
+            className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'
+          >
             <FcGoogle size={32} />
 
             <p>Continue with Google</p>
