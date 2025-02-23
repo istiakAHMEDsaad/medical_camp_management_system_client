@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth.js';
 import toast from 'react-hot-toast';
+import defaultAvatar from '../../../assets/placeholder.jpg';
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -124,8 +125,8 @@ const Navbar = () => {
               >
                 <div className='w-10 rounded-full'>
                   <img
-                    alt='Tailwind CSS Navbar component'
-                    src='https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
+                    alt='User IMG'
+                    src={user?.email ? user?.photoURL : defaultAvatar}
                   />
                 </div>
               </div>
@@ -134,10 +135,20 @@ const Navbar = () => {
                 tabIndex={0}
                 className='menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow'
               >
-                <div className='py-1 pl-[11px] flex items-center gap-2'>
-                  <p className='font-semibold text-base'>Name:</p>
-                  <span className='text-base italic text-red-600'>lulu</span>
-                </div>
+                {user?.email ? (
+                  <div
+                    className='py-1 pl-[11px] flex items-center gap-2 tooltip'
+                    data-tip={user?.displayName}
+                  >
+                    <p className='font-semibold text-base'>Name:</p>
+                    <span className='text-base italic text-red-600'>
+                      {user?.displayName.substring(0, 7)}...
+                    </span>
+                  </div>
+                ) : (
+                  ''
+                )}
+                {/* displayName */}
 
                 {user?.email ? (
                   <>

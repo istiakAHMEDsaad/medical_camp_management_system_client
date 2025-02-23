@@ -5,6 +5,8 @@ import Home from '../pages/Home/Home';
 import AvailableCamp from '../components/Available_Camp/AvailableCamp';
 import SignIn from '../pages/Authentication/SignIn';
 import SignUp from '../pages/Authentication/SignUp';
+import DashboardLayout from '../layouts/DashboardLayout';
+import PrivateRoutes from './PrivateRoutes';
 
 export const router = createBrowserRouter([
   {
@@ -24,10 +26,24 @@ export const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <SignIn/>
+    element: <SignIn />,
   },
   {
     path: '/signup',
-    element: <SignUp/>
-  }
+    element: <SignUp />,
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <PrivateRoutes>
+        <DashboardLayout />
+      </PrivateRoutes>
+    ),
+  },
 ]);
+
+/* 
+Anwar Hossain
+anawar_hossain@doodle.com
+Anawar@1234
+*/
