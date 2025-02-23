@@ -14,7 +14,6 @@ import {
 import { app } from '../firebase/firebase.config';
 import axios from 'axios';
 
-
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
@@ -67,13 +66,14 @@ const AuthProvider = ({ children }) => {
         setUser(currentUser);
 
         //save or update user info
-        await axios.post(`${import.meta.env.VITE_API_URL}/users/${currentUser?.email}`,{
-          name: currentUser?.displayName,
-          email: currentUser?.email,
-          image: currentUser?.photoURL,
-          role: 'organizer',
-
-        })
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/users/${currentUser?.email}`,
+          {
+            name: currentUser?.displayName,
+            email: currentUser?.email,
+            image: currentUser?.photoURL,
+          }
+        );
 
         //get jwt token
         await axios.post(
