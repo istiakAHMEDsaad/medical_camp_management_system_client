@@ -30,7 +30,7 @@ const Navbar = () => {
 
       <li>
         <NavLink
-          to='/available-camp'
+          to='/available-camps'
           className={({ isActive, isPending }) =>
             isActive
               ? 'btn btn-secondary text-white'

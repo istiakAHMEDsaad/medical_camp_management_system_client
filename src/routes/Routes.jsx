@@ -12,6 +12,7 @@ import HistoryPayment from '../components/Dashboard/Participant/HistoryPayment';
 import CampsRegistered from '../components/Dashboard/Participant/CampsRegistered';
 import Profile from '../components/Dashboard/Sidebar/Profile';
 import AddACamp from '../components/Dashboard/Admin/AddACamp';
+import CampDetails from '../pages/CampDetails';
 
 export const router = createBrowserRouter([
   {
@@ -24,10 +25,14 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/available-camp',
+        path: '/available-camps',
         element: <AvailableCamp />,
       },
     ],
+  },
+  {
+    path: '/camps/:id',
+    element: <CampDetails/>
   },
   {
     path: '/login',
