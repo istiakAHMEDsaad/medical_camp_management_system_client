@@ -4,6 +4,7 @@ import './index.css';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes/Routes';
 import 'animate.css';
+import "react-datepicker/dist/react-datepicker.css";
 import AuthProvider from './providers/AuthProvider';
 import { Toaster } from 'react-hot-toast'
 
