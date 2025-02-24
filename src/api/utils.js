@@ -9,5 +9,4 @@ export const imageUpload = async (imageData) => {
     formData
   );
   return data?.data?.display_url;
-  
 };

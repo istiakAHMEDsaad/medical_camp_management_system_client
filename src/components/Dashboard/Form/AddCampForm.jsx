@@ -1,16 +1,22 @@
 import { useForm } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import PropTypes from 'prop-types';
+import { TbFidgetSpinner } from 'react-icons/tb'
 
-
-const AddCampForm = ({onSubmit, startDate, setStartDate}) => {
+const AddCampForm = ({
+  onSubmit,
+  startDate,
+  setStartDate,
+  checkUpImg,
+  setCheckUpImg,
+  loading
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
   } = useForm();
-  
 
   return (
     <div className='max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg'>
@@ -32,7 +38,24 @@ const AddCampForm = ({onSubmit, startDate, setStartDate}) => {
         {/* Image */}
         <div>
           <label className='block text-gray-700'>Image</label>
+          <p
+            className={`text-sm ${
+              checkUpImg === 'no photo uploded'
+                ? 'text-red-500 italic'
+                : 'text-green-500'
+            }`}
+          >
+            {checkUpImg}
+          </p>
           <input
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                setCheckUpImg(file.name);
+              } else {
+                setCheckUpImg('no photo uploaded');
+              }
+            }}
             type='file'
             {...register('image', { required: true })}
             className='file-input input-bordered w-full'
@@ -132,7 +155,8 @@ const AddCampForm = ({onSubmit, startDate, setStartDate}) => {
 
         {/* Submit */}
         <button type='submit' className='btn btn-primary w-full mt-4'>
-          Submit
+          {loading ? (<TbFidgetSpinner className='animate-spin m-auto'/>) : 'Submit'}
+          
         </button>
       </form>
     </div>
@@ -142,8 +166,11 @@ const AddCampForm = ({onSubmit, startDate, setStartDate}) => {
 AddCampForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   startDate: PropTypes.instanceOf(Date).isRequired,
-  setStartDate: PropTypes.func.isRequired
-}
+  setStartDate: PropTypes.func.isRequired,
+  checkUpImg: PropTypes.any,
+  setCheckUpImg: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired
+};
 
 export default AddCampForm;
 /* 
