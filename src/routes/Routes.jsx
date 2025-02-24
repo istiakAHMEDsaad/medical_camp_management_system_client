@@ -11,6 +11,7 @@ import AnalyticsGraph from '../components/Dashboard/Participant/AnalyticsGraph';
 import HistoryPayment from '../components/Dashboard/Participant/HistoryPayment';
 import CampsRegistered from '../components/Dashboard/Participant/CampsRegistered';
 import Profile from '../components/Dashboard/Sidebar/Profile';
+import AddACamp from '../components/Dashboard/Admin/AddACamp';
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
+        path: 'add-camp',
+        element: (
+          <PrivateRoutes>
+            <AddACamp />
+          </PrivateRoutes>
+        ),
+      },
+      {
         path: 'analytics',
         element: (
           <PrivateRoutes>
@@ -70,10 +79,12 @@ export const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <PrivateRoutes>
-          <Profile/>
-        </PrivateRoutes>
-      }
+        element: (
+          <PrivateRoutes>
+            <Profile />
+          </PrivateRoutes>
+        ),
+      },
     ],
   },
 ]);

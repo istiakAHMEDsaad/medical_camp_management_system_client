@@ -1,7 +1,7 @@
 import { FaHistory } from 'react-icons/fa';
 import MenuItem from './MenuItem';
 
-const PaymentHistory = () => {
+const PaymentHistoryNav = () => {
   return (
     <>
       <MenuItem
@@ -13,4 +13,4 @@ const PaymentHistory = () => {
   );
 };
 
-export default PaymentHistory;
+export default PaymentHistoryNav;

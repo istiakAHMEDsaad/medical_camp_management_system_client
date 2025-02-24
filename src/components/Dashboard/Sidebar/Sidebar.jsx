@@ -2,14 +2,15 @@ import { Link } from 'react-router-dom';
 import { AiOutlineBars } from 'react-icons/ai';
 import logo from '/medical-camp-icon.webp';
 import { useState } from 'react';
-import RegisteredCamps from './Menu/RegisteredCamps';
-import PaymentHistory from './Menu/PaymentHistory';
-import Analytics from './Menu/Analytics';
+import RegisteredCampsNav from './Menu/RegisteredCampsNav';
+import PaymentHistoryNav from './Menu/PaymentHistoryNav';
+import AnalyticsNav from './Menu/AnalyticsNav';
 import { GrLogout } from 'react-icons/gr';
 import { FcSettings } from 'react-icons/fc';
 import MenuItem from './Menu/MenuItem';
 import useAuth from '../../../hooks/useAuth';
 import toast from 'react-hot-toast';
+import AddCampNav from './Menu/AddCampNav';
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -77,9 +78,10 @@ const Sidebar = () => {
           <div className='flex flex-col justify-between flex-1 mt-6'>
             <nav>
               {/* menu items */}
-              <RegisteredCamps />
-              <PaymentHistory />
-              <Analytics />
+              <AddCampNav/>
+              <RegisteredCampsNav />
+              <PaymentHistoryNav />
+              <AnalyticsNav />
             </nav>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { BsGraphUp } from 'react-icons/bs';
 import MenuItem from './MenuItem';
 
-const Analytics = () => {
+const AnalyticsNav = () => {
   return (
     <>
       <MenuItem icon={BsGraphUp} label={'Analytics'} address={'analytics'} />
@@ -9,4 +9,4 @@ const Analytics = () => {
   );
 };
 
-export default Analytics;
+export default AnalyticsNav;

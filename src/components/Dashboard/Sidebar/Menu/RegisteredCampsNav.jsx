@@ -1,7 +1,7 @@
 import { FaClipboardCheck } from 'react-icons/fa';
 import MenuItem from './MenuItem';
 
-const RegisteredCamps = () => {
+const RegisteredCampsNav = () => {
   return (
     <>
       <MenuItem
@@ -13,4 +13,4 @@ const RegisteredCamps = () => {
   );
 };
 
-export default RegisteredCamps;
+export default RegisteredCampsNav;
