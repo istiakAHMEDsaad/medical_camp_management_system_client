@@ -26,6 +26,8 @@ const Sidebar = () => {
 
   return (
     <>
+      <title>Dashboard</title>
+      <meta name='dashboard' content='Welcome to the dashboard' />
       {/* Small Screen Navbar */}
       <div className='bg-gray-100 text-gray-800 flex justify-between md:hidden'>
         <div>

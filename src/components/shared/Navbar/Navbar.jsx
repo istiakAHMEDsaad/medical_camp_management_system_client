@@ -5,7 +5,6 @@ import defaultAvatar from '../../../assets/placeholder.jpg';
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  console.log(user);
 
   const handleLogOut = () => {
     logOut();
@@ -153,7 +152,7 @@ const Navbar = () => {
                 {user?.email ? (
                   <>
                     <li>
-                      <Link to={'/dash-board'} className='text-base'>
+                      <Link to={'/dashboard'} className='text-base'>
                         Dashboard
                       </Link>
                     </li>

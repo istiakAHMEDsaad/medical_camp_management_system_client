@@ -10,6 +10,7 @@ import PrivateRoutes from './PrivateRoutes';
 import AnalyticsGraph from '../components/Dashboard/Participant/AnalyticsGraph';
 import HistoryPayment from '../components/Dashboard/Participant/HistoryPayment';
 import CampsRegistered from '../components/Dashboard/Participant/CampsRegistered';
+import Profile from '../components/Dashboard/Sidebar/Profile';
 
 export const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: '/dash-board',
+    path: '/dashboard',
     element: (
       <PrivateRoutes>
         <DashboardLayout />
@@ -67,6 +68,12 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      {
+        path: 'profile',
+        element: <PrivateRoutes>
+          <Profile/>
+        </PrivateRoutes>
+      }
     ],
   },
 ]);
