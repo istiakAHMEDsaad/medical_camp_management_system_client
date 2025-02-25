@@ -11,9 +11,15 @@ import {
   FaMoneyBill,
   FaArrowLeft,
 } from 'react-icons/fa';
+import useAuth from '../hooks/useAuth';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import ApplyCampModal from '../components/Modal/ApplyCampModal';
 
 const CampDetails = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { id } = useParams();
+  const { user } = useAuth();
 
   const {
     data: singleCamp = [],
@@ -43,6 +49,19 @@ const CampDetails = () => {
   if (isLoading) {
     <LoadingSpinner />;
   }
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+  const requestHandler = async () => {
+    try {
+      //
+    } catch (error) {
+      toast.error(error?.message);
+    } finally {
+      closeModal();
+    }
+  };
 
   return (
     <div className='container mx-auto'>
@@ -134,6 +153,24 @@ const CampDetails = () => {
                 {description}
               </span>
             </p>
+            <div className='flex justify-end'>
+              {user?.email ? (
+                <button
+                  onClick={() => setIsOpen(true)}
+                  className='btn btn-primary'
+                >
+                  Join Camp
+                </button>
+              ) : (
+                ''
+              )}
+              <ApplyCampModal
+                requestHandler={requestHandler}
+                closeModal={closeModal}
+                isOpen={isOpen}
+                singleCamp={singleCamp}
+              />
+            </div>
           </div>
         </div>
       </div>

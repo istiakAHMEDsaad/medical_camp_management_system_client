@@ -3,11 +3,9 @@ import AddCampForm from '../Form/AddCampForm';
 import { format } from 'date-fns';
 import { imageUpload } from '../../../api/utils';
 import toast from 'react-hot-toast';
-import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const AddACamp = () => {
-  const {user} = useAuth();
   const axiosSecure = useAxiosSecure();
   
   const [startDate, setStartDate] = useState(new Date());
