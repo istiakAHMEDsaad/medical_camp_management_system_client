@@ -22,7 +22,7 @@ const ShowcaseCard = ({ camp }) => {
   } = camp || {};
 
   return (
-    <Link to={`/camps/${_id}`} className='card md:w-96 bg-white shadow-sm rounded-lg overflow-hidden border border-gray-200 lg:hover:scale-105 transition-transform cursor-pointer'>
+    <Link to={`/camps/${_id}`} className='card md:w-96 bg-white shadow-sm rounded-lg overflow-hidden border border-gray-200 lg:hover:scale-105 transition-transform cursor-pointer justify-around'>
       {/* image */}
       <img
         src={image}

@@ -46,7 +46,7 @@ const WhyChooseUs = () => {
       <div className='flex flex-wrap justify-around'>
         {features.map((feature, index) => (
           <div
-            className={`card border-2 rounded-lg p-6 m-4 w-64 text-center shadow-lg flex flex-col items-center ${feature.bgColor}`}
+            className={`card border-2 rounded-lg p-6 m-4 w-64 text-center shadow-lg flex flex-col items-center ${feature.bgColor} lg:hover:scale-105 transition-all`}
             key={index}
             style={{ borderColor: feature.color }}
           >
