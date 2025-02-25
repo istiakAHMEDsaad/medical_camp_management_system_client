@@ -12,12 +12,13 @@ import {
   FaArrowLeft,
 } from 'react-icons/fa';
 import useAuth from '../hooks/useAuth';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import ApplyCampModal from '../components/Modal/ApplyCampModal';
 
 const CampDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const formRef = useRef(null);
   const { id } = useParams();
   const { user } = useAuth();
 
@@ -53,14 +54,36 @@ const CampDetails = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const requestHandler = async () => {
-    try {
-      //
-    } catch (error) {
-      toast.error(error?.message);
-    } finally {
-      closeModal();
-    }
+  const requestHandler = async (e) => {
+    e.preventDefault();
+    const form = formRef.current;
+
+    const currentCampName = form.currentCampName.value;
+    const currentCampFees = parseFloat(form.currentCampFees.value);
+    const currentCampLocation = form.currentCampLocation.value;
+    const currentCampDoctor = form.currentCampDoctor.value;
+    const currentParticipantName = form.currentParticipantName.value;
+    const currentParticipantEmail = form.currentParticipantEmail.value;
+    const currentParticipantAge = form.currentParticipantAge.value;
+    const currentParticipantMoba = form.currentParticipantMoba.value;
+    const currentParticipantGen = form.currentParticipantGen.value;
+    const currentParticipantEmergencyMoba =
+      form.currentParticipantEmergencyMoba.value;
+
+    const collectInfo = {
+      currentCampName,
+      currentCampFees,
+      currentCampLocation,
+      currentCampDoctor,
+      currentParticipantName,
+      currentParticipantEmail,
+      currentParticipantAge,
+      currentParticipantMoba,
+      currentParticipantGen,
+      currentParticipantEmergencyMoba,
+    };
+
+    console.table(collectInfo);
   };
 
   return (
@@ -169,6 +192,7 @@ const CampDetails = () => {
                 closeModal={closeModal}
                 isOpen={isOpen}
                 singleCamp={singleCamp}
+                formRef={formRef}
               />
             </div>
           </div>

@@ -1,4 +1,5 @@
 import Carousel from '../../components/Swiper/Carousel';
+import WhyChooseUs from '../../components/WhyChooseUs';
 import ShowcaseSection from './ShowcaseSection';
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
       <div className='container mx-auto pt-4 overflow-hidden'>
         <Carousel />
         <ShowcaseSection />
+        <WhyChooseUs />
       </div>
     </>
   );
