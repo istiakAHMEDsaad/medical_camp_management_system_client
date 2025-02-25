@@ -8,12 +8,13 @@ const AvailableCamp = () => {
   const [twoCol, setTwoCol] = useState(false);
   const [search, setSearch] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilter] = useState('');
 
   const { data: camps, isLoading } = useQuery({
-    queryKey: ['camps', searchTerm],
+    queryKey: ['camps', searchTerm, filter],
     queryFn: async () => {
       const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/camps?search=${searchTerm}`
+        `${import.meta.env.VITE_API_URL}/camps?search=${searchTerm}&filter=${filter}`
       );
       return data;
     },
@@ -23,14 +24,16 @@ const AvailableCamp = () => {
     return <LoadingSpinner />;
   }
 
-  const handleReset = () => {
-    setSearchTerm('');
-  };
-
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchTerm(search);
   };
+
+  const handleReset = () => {
+    setSearchTerm('');
+    setFilter('')
+  };
+
 
   return (
     <>
@@ -75,10 +78,10 @@ const AvailableCamp = () => {
               </div>
 
               <div>
-                <select name='category' id='category' className='select'>
+                <select onChange={(e)=>setFilter(e.target.value)} value={filter} name='category' id='category' className='select'>
                   <option value=''>Filter By Category</option>
-                  <option value='ascending'>Price Lowest</option>
-                  <option value='descending'>Price Highest</option>
+                  <option value='lowest'>Price Lowest</option>
+                  <option value='highest'>Price Highest</option>
                 </select>
               </div>
 
@@ -92,12 +95,12 @@ const AvailableCamp = () => {
         </div>
 
         {/* Camp card format */}
-        <div>
+        <div className='flex flex-col items-center'>
           {camps && camps?.length > 0 ? (
             <div
               className={`grid grid-cols-1 ${
-                twoCol === false ? 'lg:grid-cols-3 md:grid-cols-2 xl:px-30' : 'md:grid-cols-2 lg:px-80'
-              } lg:gap-y-10 md:gap-4 gap-y-10`}
+                twoCol === false ? 'lg:grid-cols-3 md:grid-cols-2 lg:gap-10' : 'md:grid-cols-2'
+              } gap-4`}
             >
               {camps?.map((camp) => (
                 <ShowcaseCard key={camp?._id} camp={camp} />
