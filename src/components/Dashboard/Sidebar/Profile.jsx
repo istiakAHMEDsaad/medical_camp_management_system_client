@@ -2,6 +2,7 @@ import useAuth from '../../../hooks/useAuth';
 import campPic from '../../../assets/camping_fun_h.webp';
 import { useState } from 'react';
 import ChangePasswordModal from '../../Modal/ChangePasswordModal';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const { user, handleChangePassword, logOut } = useAuth();
@@ -56,14 +57,26 @@ const Profile = () => {
                 </p>
 
                 <div>
-                  <button className='bg-blue-500 px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-600 transition-colors block mb-1'>
+                  <Link
+                    to={`/profile/update-profile`}
+                    className='bg-blue-500 px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-600 transition-colors block mb-1'
+                  >
                     Update Profile
-                  </button>
-                  <button onClick={openModal}  className='bg-blue-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-600 transition-colors'>
+                  </Link>
+                  <button
+                    onClick={openModal}
+                    className='bg-blue-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-600 transition-colors'
+                  >
                     Change Password
                   </button>
 
-                  {isModalOpen && (<ChangePasswordModal handleChangePassword={handleChangePassword} onClose={closeModal} logOut={logOut} /> )}
+                  {isModalOpen && (
+                    <ChangePasswordModal
+                      handleChangePassword={handleChangePassword}
+                      onClose={closeModal}
+                      logOut={logOut}
+                    />
+                  )}
                 </div>
               </div>
             </div>

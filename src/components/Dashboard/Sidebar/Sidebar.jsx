@@ -13,6 +13,7 @@ import toast from 'react-hot-toast';
 import AddCampNav from './Menu/AddCampNav';
 import ManageCampsNav from './Menu/ManageCampsNav';
 import { FaTimes } from "react-icons/fa";
+import ParticipantProfileNav from './Menu/ParticipantProfileNav';
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -83,8 +84,9 @@ const Sidebar = () => {
               {/* menu items */}
               <AddCampNav />
               <ManageCampsNav />
-              <RegisteredCampsNav />
 
+              <RegisteredCampsNav />
+              <ParticipantProfileNav/>
               <PaymentHistoryNav />
               <AnalyticsNav />
             </nav>

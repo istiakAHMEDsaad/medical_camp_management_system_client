@@ -10,7 +10,7 @@ const AvailableCamp = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('');
 
-  const { data: camps, isLoading } = useQuery({
+  const { data: camps = [], isLoading } = useQuery({
     queryKey: ['camps', searchTerm, filter],
     queryFn: async () => {
       const { data } = await axios(

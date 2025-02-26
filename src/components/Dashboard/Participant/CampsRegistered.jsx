@@ -2,7 +2,7 @@
 
 const CampsRegistered = () => {
   return (
-    <div>CampsRegistered</div>
+    <div>participant registerd camp</div>
   )
 }
 

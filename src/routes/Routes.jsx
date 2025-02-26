@@ -14,6 +14,8 @@ import Profile from '../components/Dashboard/Sidebar/Profile';
 import AddACamp from '../components/Dashboard/Admin/AddACamp';
 import CampDetails from '../pages/CampDetails';
 import ManageCamps from '../components/Dashboard/Admin/ManageCamps';
+import ProfileUpdate from '../components/Dashboard/Sidebar/ProfileUpdate';
+import ParticipantProfileManage from '../components/Dashboard/Participant/ParticipantProfileManage';
 
 
 export const router = createBrowserRouter([
@@ -61,6 +63,16 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: 'manage-camps',
+        element: (
+          <PrivateRoutes>
+            <ManageCamps/>
+          </PrivateRoutes>
+        )
+      },
+      
+      // participants
+      {
         path: 'registered-camps',
         element: (
           <PrivateRoutes>
@@ -69,26 +81,24 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'manage-camps',
-        element: (
-          <PrivateRoutes>
-            <ManageCamps/>
-          </PrivateRoutes>
-        )
-      },
-      {
-        path: 'analytics',
-        element: (
-          <PrivateRoutes>
-            <AnalyticsGraph />
-          </PrivateRoutes>
-        ),
+        path: 'manage-profile',
+        element: <PrivateRoutes>
+          <ParticipantProfileManage/>
+        </PrivateRoutes>
       },
       {
         path: 'payment-history',
         element: (
           <PrivateRoutes>
             <HistoryPayment />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: 'analytics',
+        element: (
+          <PrivateRoutes>
+            <AnalyticsGraph />
           </PrivateRoutes>
         ),
       },
@@ -100,8 +110,17 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      
     ],
   },
+  {
+    path: 'profile/update-profile',
+    element: (
+      <PrivateRoutes>
+        <ProfileUpdate/>
+      </PrivateRoutes>
+    )
+  }
 ]);
 
 /* 
