@@ -31,7 +31,6 @@ const ManageCamps = () => {
     return <LoadingSpinner />;
   }
 
-
   const handleEditClick = (camp) => {
     setSelectedCamp(camp);
     setGetId(camp?._id);
@@ -42,8 +41,7 @@ const ManageCamps = () => {
     setIsModalOpen(false);
   };
 
-
-  const handleModalSubmit = async(event) => {
+  const handleModalSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);
@@ -57,16 +55,27 @@ const ManageCamps = () => {
       description: formData.get('description'),
     };
 
-    console.table(updatedCamp)
-
     try {
-      const {data} = await axiosSecure.patch(`/camps-edit/${getId}`, updatedCamp)
-      console.log(data)
+      const { data } = await axiosSecure.patch(
+        `/camps-edit/${getId}`,
+        updatedCamp
+      );
+      console.log(data);
       toast.success('Update Successfully');
 
       handleModalClose();
     } catch (error) {
-      toast.error(error?.message)
+      toast.error(error?.message);
+    }
+  };
+
+  const handleDelete = async (dID) => {
+    try {
+      await axiosSecure.delete(`/delete-camp/${dID}`);
+      toast.success('Deleted');
+      refetch();
+    } catch (error) {
+      toast.error(error?.message);
     }
   };
 
@@ -106,12 +115,17 @@ const ManageCamps = () => {
                 <td>
                   <div className='flex gap-2'>
                     <button
-                       onClick={() => handleEditClick(item)}
+                      onClick={() => handleEditClick(item)}
                       className='btn btn-sm btn-secondary'
                     >
                       edit
                     </button>
-                    <button className='btn btn-sm btn-error'>delete</button>
+                    <button
+                      onClick={() => handleDelete(item?._id)}
+                      className='btn btn-sm btn-error'
+                    >
+                      delete
+                    </button>
                   </div>
                 </td>
               </tr>

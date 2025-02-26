@@ -12,8 +12,10 @@ import useAuth from '../../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import AddCampNav from './Menu/AddCampNav';
 import ManageCampsNav from './Menu/ManageCampsNav';
-import { FaTimes } from "react-icons/fa";
+import { FaTimes } from 'react-icons/fa';
 import ParticipantProfileNav from './Menu/ParticipantProfileNav';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -27,6 +29,22 @@ const Sidebar = () => {
   const handleToggle = () => {
     setActive(!isActive);
   };
+
+  const axiosSecure = useAxiosSecure();
+
+  const {
+    data: userRole = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['userRole'],
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/all-users`);
+      return data;
+    },
+  });
+
+  const admin = userRole?.[0]?.role;
 
   return (
     <>
@@ -66,7 +84,9 @@ const Sidebar = () => {
         <div>
           {/* logo */}
           <div className='relative md:block'>
-            <span onClick={handleToggle} className='absolute right-2 md:hidden'><FaTimes size={30}/></span>
+            <span onClick={handleToggle} className='absolute right-2 md:hidden'>
+              <FaTimes size={30} />
+            </span>
             <Link
               to={'/'}
               className='hidden w-full md:flex md:justify-center md:items-center shadow-sm rounded-lg bg-blue-100 mx-auto'
@@ -82,13 +102,22 @@ const Sidebar = () => {
           <div className='flex flex-col justify-between flex-1 mt-6'>
             <nav>
               {/* menu items */}
-              <AddCampNav />
-              <ManageCampsNav />
 
-              <RegisteredCampsNav />
-              <ParticipantProfileNav/>
-              <PaymentHistoryNav />
-              <AnalyticsNav />
+              {admin === 'admin' ? (
+                <>
+                  <AddCampNav />
+                  <ManageCampsNav />
+                </>
+              ) : admin === 'participant' ? (
+                <>
+                  <RegisteredCampsNav />
+                  <ParticipantProfileNav />
+                  <PaymentHistoryNav />
+                  <AnalyticsNav />
+                </>
+              ) : (
+                ''
+              )}
             </nav>
           </div>
         </div>
