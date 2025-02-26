@@ -24,11 +24,8 @@ const CampDetails = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const {
-    data: singleCamp = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  //"refetch" to fetch prefetch data
+  const { data: singleCamp = [], isLoading } = useQuery({
     queryKey: ['single_camp', id],
     queryFn: async () => {
       const { data } = await axios(
@@ -94,7 +91,7 @@ const CampDetails = () => {
     // console.table(collectInfo);
 
     try {
-       await axiosSecure.post('/join-camp', collectInfo);
+      await axiosSecure.post('/join-camp', collectInfo);
       toast.success('You join this camp!');
       closeModal();
     } catch (error) {

@@ -13,6 +13,8 @@ import CampsRegistered from '../components/Dashboard/Participant/CampsRegistered
 import Profile from '../components/Dashboard/Sidebar/Profile';
 import AddACamp from '../components/Dashboard/Admin/AddACamp';
 import CampDetails from '../pages/CampDetails';
+import ManageCamps from '../components/Dashboard/Admin/ManageCamps';
+
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +34,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/camps/:id',
-    element: <CampDetails/>
+    element: <CampDetails />,
   },
   {
     path: '/login',
@@ -59,6 +61,22 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: 'registered-camps',
+        element: (
+          <PrivateRoutes>
+            <CampsRegistered />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: 'manage-camps',
+        element: (
+          <PrivateRoutes>
+            <ManageCamps/>
+          </PrivateRoutes>
+        )
+      },
+      {
         path: 'analytics',
         element: (
           <PrivateRoutes>
@@ -71,14 +89,6 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <HistoryPayment />
-          </PrivateRoutes>
-        ),
-      },
-      {
-        path: 'registered-camps',
-        element: (
-          <PrivateRoutes>
-            <CampsRegistered />
           </PrivateRoutes>
         ),
       },
@@ -97,7 +107,7 @@ export const router = createBrowserRouter([
 /* 
 Anwar Hossain
 anawar_hossain@doodle.com
-Anawar@1234
+Anawar@123
 */
 
 /* 

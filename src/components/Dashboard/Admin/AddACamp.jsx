@@ -39,7 +39,6 @@ const AddACamp = () => {
       description,
     };
 
-    console.table(campData);
 
     /* let imageFile = data.image[0];
     let parseFees = parseFloat(data.campFees);

@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updatePassword,
   updateProfile,
 } from 'firebase/auth';
 import { app } from '../firebase/firebase.config';
@@ -59,6 +60,15 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  //update password
+  const handleChangePassword = (newPassword) => {
+    if (auth.currentUser) {
+      return updatePassword(auth.currentUser, newPassword);
+    } else {
+      throw new Error('No user is currently signed in.');
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       console.log('CurrentUser-->', currentUser?.email);
@@ -107,6 +117,7 @@ const AuthProvider = ({ children }) => {
     logOut,
     handleResetPassword,
     updateUserProfile,
+    handleChangePassword
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

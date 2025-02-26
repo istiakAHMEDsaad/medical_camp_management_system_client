@@ -11,6 +11,8 @@ import MenuItem from './Menu/MenuItem';
 import useAuth from '../../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import AddCampNav from './Menu/AddCampNav';
+import ManageCampsNav from './Menu/ManageCampsNav';
+import { FaTimes } from "react-icons/fa";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -62,7 +64,8 @@ const Sidebar = () => {
       >
         <div>
           {/* logo */}
-          <div>
+          <div className='relative md:block'>
+            <span onClick={handleToggle} className='absolute right-2 md:hidden'><FaTimes size={30}/></span>
             <Link
               to={'/'}
               className='hidden w-full md:flex md:justify-center md:items-center shadow-sm rounded-lg bg-blue-100 mx-auto'
@@ -78,8 +81,10 @@ const Sidebar = () => {
           <div className='flex flex-col justify-between flex-1 mt-6'>
             <nav>
               {/* menu items */}
-              <AddCampNav/>
+              <AddCampNav />
+              <ManageCampsNav />
               <RegisteredCampsNav />
+
               <PaymentHistoryNav />
               <AnalyticsNav />
             </nav>

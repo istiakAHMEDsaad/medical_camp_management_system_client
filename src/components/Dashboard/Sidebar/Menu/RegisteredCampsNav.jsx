@@ -6,7 +6,7 @@ const RegisteredCampsNav = () => {
     <>
       <MenuItem
         icon={FaClipboardCheck}
-        label={'Registered Camps'}
+        label={'Participant Registered Camp'}
         address={'registered-camps'}
       />
     </>

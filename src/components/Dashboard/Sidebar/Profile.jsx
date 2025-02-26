@@ -1,8 +1,14 @@
 import useAuth from '../../../hooks/useAuth';
 import campPic from '../../../assets/camping_fun_h.webp';
+import { useState } from 'react';
+import ChangePasswordModal from '../../Modal/ChangePasswordModal';
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, handleChangePassword, logOut } = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <>
@@ -53,9 +59,11 @@ const Profile = () => {
                   <button className='bg-blue-500 px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-600 transition-colors block mb-1'>
                     Update Profile
                   </button>
-                  <button className='bg-blue-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-600 transition-colors'>
+                  <button onClick={openModal}  className='bg-blue-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-600 transition-colors'>
                     Change Password
                   </button>
+
+                  {isModalOpen && (<ChangePasswordModal handleChangePassword={handleChangePassword} onClose={closeModal} logOut={logOut} /> )}
                 </div>
               </div>
             </div>
