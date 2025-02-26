@@ -15,12 +15,14 @@ import useAuth from '../hooks/useAuth';
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import ApplyCampModal from '../components/Modal/ApplyCampModal';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const CampDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
   const formRef = useRef(null);
   const { id } = useParams();
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: singleCamp = [],
@@ -54,6 +56,7 @@ const CampDetails = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
+
   const requestHandler = async (e) => {
     e.preventDefault();
     const form = formRef.current;
@@ -64,11 +67,12 @@ const CampDetails = () => {
     const currentCampDoctor = form.currentCampDoctor.value;
     const currentParticipantName = form.currentParticipantName.value;
     const currentParticipantEmail = form.currentParticipantEmail.value;
-    const currentParticipantAge = form.currentParticipantAge.value;
+    const currentParticipantAge = parseInt(form.currentParticipantAge.value);
     const currentParticipantMoba = form.currentParticipantMoba.value;
     const currentParticipantGen = form.currentParticipantGen.value;
     const currentParticipantEmergencyMoba =
       form.currentParticipantEmergencyMoba.value;
+    const campId = id;
 
     const collectInfo = {
       currentCampName,
@@ -81,9 +85,26 @@ const CampDetails = () => {
       currentParticipantMoba,
       currentParticipantGen,
       currentParticipantEmergencyMoba,
+      campId,
+      participantEmail: user?.email,
+      participantName: user?.displayName,
+      participantImg: user?.photoURL,
     };
 
-    console.table(collectInfo);
+    // console.table(collectInfo);
+
+    try {
+       await axiosSecure.post('/join-camp', collectInfo);
+      toast.success('You join this camp!');
+      closeModal();
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(error?.message);
+        closeModal();
+      }
+    }
   };
 
   return (

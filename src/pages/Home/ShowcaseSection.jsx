@@ -26,9 +26,9 @@ const ShowcaseSection = () => {
       >
         Our most popular <span className='text-blue-600'>Medical Camps</span>
       </p>
-      <div className='mt-4'>
+      <div className='mt-4 flex flex-col items-center justify-center'>
         {camps && camps?.length > 0 ? (
-          <div>
+          <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4'>
             {camps?.map((camp) => (
               <ShowcaseCard key={camp?._id} camp={camp} />
             ))}

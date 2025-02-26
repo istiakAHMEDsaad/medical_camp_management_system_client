@@ -43,20 +43,24 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      <li>
-        <NavLink
-          to='/aa'
-          className={({ isActive, isPending }) =>
-            isActive
-              ? 'btn btn-secondary text-white'
-              : isPending
-              ? 'pending'
-              : 'btn btn-outline btn-secondary text-black'
-          }
-        >
-          <span>Join US</span>
-        </NavLink>
-      </li>
+      {user && user?.email ? (
+        ''
+      ) : (
+        <li>
+          <NavLink
+            to='/login'
+            className={({ isActive, isPending }) =>
+              isActive
+                ? 'btn btn-secondary text-white'
+                : isPending
+                ? 'pending'
+                : 'btn btn-outline btn-secondary text-black'
+            }
+          >
+            <span>Join US</span>
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
