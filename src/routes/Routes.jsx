@@ -18,6 +18,7 @@ import ProfileUpdate from '../components/Dashboard/Sidebar/ProfileUpdate';
 import ParticipantProfileManage from '../components/Dashboard/Participant/ParticipantProfileManage';
 
 
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -70,6 +71,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         )
       },
+
       
       // participants
       {

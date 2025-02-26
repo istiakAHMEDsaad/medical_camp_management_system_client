@@ -156,8 +156,8 @@ const AddCampForm = ({
         {/* Submit */}
         <button type='submit' className='btn btn-primary w-full mt-4'>
           {loading ? (<TbFidgetSpinner className='animate-spin m-auto'/>) : 'Submit'}
-          
         </button>
+      
       </form>
     </div>
   );
