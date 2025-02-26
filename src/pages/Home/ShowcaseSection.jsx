@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 
 const ShowcaseSection = () => {
   const { data: camps, isLoading } = useQuery({
-    queryKey: ['camps'],
+    queryKey: ['famous-camps'],
     queryFn: async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/camps`);
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/famous-camp?limit=6`);
       return data;
     },
   });
