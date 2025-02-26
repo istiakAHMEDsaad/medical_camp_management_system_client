@@ -4,9 +4,11 @@ import { format } from 'date-fns';
 import { imageUpload } from '../../../api/utils';
 import toast from 'react-hot-toast';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAuth from '../../../hooks/useAuth';
 
 const AddACamp = () => {
   const axiosSecure = useAxiosSecure();
+  const {user} = useAuth();
   
   const [startDate, setStartDate] = useState(new Date());
   const [checkUpImg, setCheckUpImg] = useState('no photo uploded');
@@ -37,10 +39,17 @@ const AddACamp = () => {
       professional_name,
       participant_count,
       description,
+      author_name: user?.displayName,
+      author_email: user?.email,
+      author_img: user?.photoURL
     };
 
 
-    /* let imageFile = data.image[0];
+    /*
+    author_name Anwar Hossain
+    author_email anawar_hossain@doodle.com
+    author_img https://i.ibb.co/Y4yTqLFQ/user1.webp
+    let imageFile = data.image[0];
     let parseFees = parseFloat(data.campFees);
     data.image = imageFile;
     data.campFees = parseFees; */

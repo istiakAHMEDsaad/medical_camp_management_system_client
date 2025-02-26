@@ -25,7 +25,7 @@ const CampDetails = () => {
   const axiosSecure = useAxiosSecure();
 
   //"refetch" to fetch prefetch data
-  const { data: singleCamp = [], isLoading } = useQuery({
+  const { data: singleCamp = [], isLoading, refetch } = useQuery({
     queryKey: ['single_camp', id],
     queryFn: async () => {
       const { data } = await axios(
@@ -86,6 +86,9 @@ const CampDetails = () => {
       participantEmail: user?.email,
       participantName: user?.displayName,
       participantImg: user?.photoURL,
+      paymentStatus: 'unpaid',
+      confirmationStatus: 'pending',
+      feedbackStatus: 'n/a'
     };
 
     // console.table(collectInfo);
@@ -93,6 +96,7 @@ const CampDetails = () => {
     try {
       await axiosSecure.post('/join-camp', collectInfo);
       toast.success('You join this camp!');
+      refetch();
       closeModal();
     } catch (error) {
       if (error.response && error.response.status === 400) {
