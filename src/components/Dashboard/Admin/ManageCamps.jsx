@@ -56,11 +56,8 @@ const ManageCamps = () => {
     };
 
     try {
-      const { data } = await axiosSecure.patch(
-        `/camps-edit/${getId}`,
-        updatedCamp
-      );
-      console.log(data);
+      await axiosSecure.patch(`/camps-edit/${getId}`, updatedCamp);
+
       toast.success('Update Successfully');
 
       handleModalClose();
@@ -72,11 +69,41 @@ const ManageCamps = () => {
   const handleDelete = async (dID) => {
     try {
       await axiosSecure.delete(`/delete-camp/${dID}`);
-      toast.success('Deleted');
+      toast.success('Delete data successfully!');
       refetch();
     } catch (error) {
       toast.error(error?.message);
     }
+  };
+
+  const modernDelete = (id) => {
+    toast((t) => (
+      <div className='flex gap-3 items-center'>
+        <div>
+          <p>
+            Are you <span className='font-bold text-red-600'>sure</span>?
+          </p>
+        </div>
+
+        <div className='gap-2 flex'>
+          <button
+            onClick={() => {
+              toast.dismiss(t.id);
+              handleDelete(id);
+            }}
+            className='bg-red-400 hover:bg-red-500 transition-colors text-white px-3 py-1 rounded-md cursor-pointer'
+          >
+            Yes
+          </button>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className='bg-green-400 hover:bg-green-500 transition-colors text-white px-3 py-1 rounded-md cursor-pointer'
+          >
+            No
+          </button>
+        </div>
+      </div>
+    ));
   };
 
   return (
@@ -120,8 +147,9 @@ const ManageCamps = () => {
                     >
                       edit
                     </button>
+
                     <button
-                      onClick={() => handleDelete(item?._id)}
+                      onClick={() => modernDelete(item?._id)}
                       className='btn btn-sm btn-error'
                     >
                       delete
@@ -133,6 +161,7 @@ const ManageCamps = () => {
           </tbody>
         </table>
       </div>
+
       <EditCampModal
         isOpen={isModalOpen}
         onClose={handleModalClose}

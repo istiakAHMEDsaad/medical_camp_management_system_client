@@ -32,19 +32,19 @@ const Sidebar = () => {
 
   const axiosSecure = useAxiosSecure();
 
-  const {
-    data: userRole = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ['userRole'],
-    queryFn: async () => {
-      const { data } = await axiosSecure(`/all-users`);
-      return data;
-    },
-  });
+  // const {
+  //   data: userRole = [],
+  //   isLoading,
+  //   refetch,
+  // } = useQuery({
+  //   queryKey: ['userRole'],
+  //   queryFn: async () => {
+  //     const { data } = await axiosSecure(`/all-users`);
+  //     return data;
+  //   },
+  // });
 
-  const admin = userRole?.[0]?.role;
+  // const admin = userRole?.[0]?.role;
 
   return (
     <>
@@ -101,23 +101,14 @@ const Sidebar = () => {
           {/* nav item */}
           <div className='flex flex-col justify-between flex-1 mt-6'>
             <nav>
-              {/* menu items */}
+              <AddCampNav />
+              <ManageCampsNav />
 
-              {admin === 'admin' ? (
-                <>
-                  <AddCampNav />
-                  <ManageCampsNav />
-                </>
-              ) : admin === 'participant' ? (
-                <>
-                  <RegisteredCampsNav />
-                  <ParticipantProfileNav />
-                  <PaymentHistoryNav />
-                  <AnalyticsNav />
-                </>
-              ) : (
-                ''
-              )}
+              <RegisteredCampsNav />
+              <ParticipantProfileNav />
+              <PaymentHistoryNav />
+              <AnalyticsNav />
+              {/* menu items */}
             </nav>
           </div>
         </div>
