@@ -16,8 +16,7 @@ import CampDetails from '../pages/CampDetails';
 import ManageCamps from '../components/Dashboard/Admin/ManageCamps';
 import ProfileUpdate from '../components/Dashboard/Sidebar/ProfileUpdate';
 import ParticipantProfileManage from '../components/Dashboard/Participant/ParticipantProfileManage';
-
-
+import ManageRegisterCamps from '../components/Dashboard/Admin/ManageRegisterCamps';
 
 export const router = createBrowserRouter([
   {
@@ -67,12 +66,19 @@ export const router = createBrowserRouter([
         path: 'manage-camps',
         element: (
           <PrivateRoutes>
-            <ManageCamps/>
+            <ManageCamps />
           </PrivateRoutes>
-        )
+        ),
+      },
+      {
+        path: 'register-camp',
+        element: (
+          <PrivateRoutes>
+            <ManageRegisterCamps />
+          </PrivateRoutes>
+        ),
       },
 
-      
       // participants
       {
         path: 'registered-camps',
@@ -84,9 +90,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'manage-profile',
-        element: <PrivateRoutes>
-          <ParticipantProfileManage/>
-        </PrivateRoutes>
+        element: (
+          <PrivateRoutes>
+            <ParticipantProfileManage />
+          </PrivateRoutes>
+        ),
       },
       {
         path: 'payment-history',
@@ -112,17 +120,16 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
-      
     ],
   },
   {
     path: 'profile/update-profile',
     element: (
       <PrivateRoutes>
-        <ProfileUpdate/>
+        <ProfileUpdate />
       </PrivateRoutes>
-    )
-  }
+    ),
+  },
 ]);
 
 /* 

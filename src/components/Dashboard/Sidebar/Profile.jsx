@@ -3,10 +3,12 @@ import campPic from '../../../assets/camping_fun_h.webp';
 import { useState } from 'react';
 import ChangePasswordModal from '../../Modal/ChangePasswordModal';
 import { Link } from 'react-router-dom';
+import useRole from '../../../hooks/useRole';
 
 const Profile = () => {
   const { user, handleChangePassword, logOut } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [role] = useRole();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -36,7 +38,7 @@ const Profile = () => {
             </a>
             {/* customer */}
             <p className='p-2 px-4 text-xs text-white bg-blue-500 rounded-full'>
-              Customer
+              {role}
             </p>
             {/* uid */}
             <p className='mt-2 md:text-xl font-medium text-gray-800 '>

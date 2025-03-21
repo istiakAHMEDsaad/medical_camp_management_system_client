@@ -14,11 +14,12 @@ import AddCampNav from './Menu/AddCampNav';
 import ManageCampsNav from './Menu/ManageCampsNav';
 import { FaTimes } from 'react-icons/fa';
 import ParticipantProfileNav from './Menu/ParticipantProfileNav';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useRole from '../../../hooks/useRole';
+import ManageRegisterCampNav from './Menu/ManageRegisterCampNav';
 
 const Sidebar = () => {
   const { logOut } = useAuth();
+  const [role] = useRole();
   const handleLogOut = async () => {
     await logOut();
     toast.success('Logout Successfully!');
@@ -29,22 +30,6 @@ const Sidebar = () => {
   const handleToggle = () => {
     setActive(!isActive);
   };
-
-  const axiosSecure = useAxiosSecure();
-
-  // const {
-  //   data: userRole = [],
-  //   isLoading,
-  //   refetch,
-  // } = useQuery({
-  //   queryKey: ['userRole'],
-  //   queryFn: async () => {
-  //     const { data } = await axiosSecure(`/all-users`);
-  //     return data;
-  //   },
-  // });
-
-  // const admin = userRole?.[0]?.role;
 
   return (
     <>
@@ -101,13 +86,16 @@ const Sidebar = () => {
           {/* nav item */}
           <div className='flex flex-col justify-between flex-1 mt-6'>
             <nav>
-              <AddCampNav />
-              <ManageCampsNav />
+              {/* admin */}
+              {role === 'admin' && <AddCampNav />}
+              {role === 'admin' && <ManageCampsNav />}
+              {role === 'admin' && <ManageRegisterCampNav />}
 
-              <RegisteredCampsNav />
-              <ParticipantProfileNav />
-              <PaymentHistoryNav />
-              <AnalyticsNav />
+              {/* participant */}
+              {role === 'participant' && <AnalyticsNav />}
+              {role === 'participant' && <ParticipantProfileNav />}
+              {role === 'participant' && <RegisteredCampsNav />}
+              {role === 'participant' && <PaymentHistoryNav />}
               {/* menu items */}
             </nav>
           </div>
